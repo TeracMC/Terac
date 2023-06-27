@@ -1,0 +1,238 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ output extension=".md" #>
+
+<#@ assembly name="System.Xml"#>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Xml.XPath" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Globalization" #>
+<#
+string path = this.Host.ResolvePath("");
+XmlDocument doc = new XmlDocument();
+doc.Load(path + @"\MCPE Protocol.xml");
+
+XmlNodeList pdus = doc.SelectNodes("//pdu[not(@namespace='raknet') and not(@namespace='ftl')]");
+XPathNavigator nav = pdus.Item(0).OwnerDocument.CreateNavigator();
+XPathExpression exp = nav.Compile("//pdu[not(@namespace='raknet') and not(@namespace='ftl')]");
+exp.AddSort("@id", XmlSortOrder.Ascending, XmlCaseOrder.None, "", XmlDataType.Text);
+
+#>
+**WARNING: T4 GENERATED MARKUP - DO NOT EDIT**
+
+Read more about packets and this specification on the [Protocol Wiki](https://github.com/NiclasOlofsson/MiNET/wiki//ref-protocol)
+
+## ALL PACKETS
+
+| ID  | ID (hex) | ID (dec) | 
+|:--- |:---------|---------:| 
+<#
+
+foreach (XPathNavigator pdu in nav.Select(exp))
+{
+	//string pduComment = (pdu.PreviousSibling == null ? null : pdu.PreviousSibling.Value) ?? "";
+	string typeIdName = CodeName(pdu.GetAttribute("name", ""), true);
+	string typeName = CodeTypeName(pdu.GetAttribute("name", ""));
+	string typeId = pdu.GetAttribute("id", "");
+	string baseType = "Packet";
+#>
+| <#= typeIdName #> | <#= typeId #> | <#= Int32.Parse(typeId.Substring(2, 2), NumberStyles.AllowHexSpecifier) #> |   
+<#	
+}
+#>
+
+
+<#
+
+List<string> datatypesLookup = new List<string>();
+foreach (XmlNode constant in doc.SelectNodes("//pdu/field"))
+{
+	string dataType = constant.Attributes["type"].Value;
+	if(!datatypesLookup.Contains(dataType))	datatypesLookup.Add(dataType);
+}
+
+#>
+## Data types
+
+| Data type | 
+|:--- |
+<#	
+datatypesLookup.Sort();
+foreach (string dataType in datatypesLookup)
+{
+#>
+| <#= dataType #> [(wiki)](https://github.com/NiclasOlofsson/MiNET/wiki//Protocol-Type-<#= dataType.Replace(" ", "") #>) |
+<#	
+}
+
+Dictionary<string, Tuple<string, string>> constantsLookup = new Dictionary<string, Tuple<string, string>>();
+foreach (XmlNode constant in doc.SelectNodes("//constant"))
+{
+	var attributes = constant.Attributes;
+	constantsLookup.Add(attributes["id"].Value, new Tuple<string, string>(attributes["type"].Value, attributes["value"].Value));
+}
+
+#>
+
+## Constants
+<#	
+
+foreach (XmlNode constant in doc.SelectNodes("//constant"))
+{
+	var attributes = constant.Attributes;
+#>
+	<#= attributes["id"].Value #>
+	<#= attributes["type"].Value #>
+	<#= attributes["value"].Value #>
+<#	
+}
+#>
+
+## Packets
+
+<#	
+
+
+foreach (XmlNode pdu in pdus)
+{
+	string pduComment = (pdu.PreviousSibling == null? null: pdu.PreviousSibling.Value)??"";
+	string typeIdName = CodeName(pdu.Attributes["name"].Value, true);
+	string typeName = CodeTypeName(pdu.Attributes["name"].Value);
+	string typeId = pdu.Attributes["id"].Value;
+	string baseType = pdu.Attributes["online"] == null? "Packet": pdu.Attributes["online"].Value.Equals(Boolean.TrueString, StringComparison.InvariantCultureIgnoreCase)?"ConnectedPacket":"Packet";
+	string isClient = pdu.Attributes["client"].Value;
+	string isServer = pdu.Attributes["server"].Value;
+	string pduSize = pdu.Attributes["size"] == null? "": pdu.Attributes["size"].Value;
+#>
+### <#= typeIdName #> (<#= typeId #>)
+Wiki: [<#= typeIdName #>](https://github.com/NiclasOlofsson/MiNET/wiki//Protocol-<#= typeIdName.Replace(" ", "") #>)
+
+**Sent from server:** <#= isServer #>  
+**Sent from client:** <#= isClient #>
+
+<#= pduComment.Replace("\t","") #>
+
+<#	
+	PrintConstants(pdu.SelectNodes("enums"));
+#>
+
+#### Fields
+
+| Name | Type | Size |
+|:-----|:-----|:-----|
+<#
+	foreach (XmlNode field in pdu.SelectNodes("field"))
+	{
+		if(field.NodeType != XmlNodeType.Element) 
+		{
+#>
+<#
+			continue;
+		}
+
+		string name = field.Attributes["name"].Value;
+		string type = field.Attributes["type"].Value;
+		string size = field.Attributes["size"] == null? "": field.Attributes["size"].Value;
+#>
+<#
+
+		if (constantsLookup.ContainsKey(field.Attributes["type"].Value))
+		{
+			//type = constantsLoopup[field.Attributes["type"].Value].Item1;
+			//string value = constantsLoopup[field.Attributes["type"].Value].Item2;
+#>
+<#
+		} 
+		else 
+		{
+#>
+<#
+		} 
+#>
+|<#= name #> | <#= type #> | <#= size #> |
+<#
+
+	} // foreach
+#>
+-----------------------------------------------------------------------
+<#
+} // foreach
+#>
+
+
+<#+
+private string UpperInitial(string name)
+{ 
+	return name[0].ToString().ToUpperInvariant() + name.Substring(1); 
+}
+
+private string CodeTypeName(string name) 
+{
+	return CodeName(name, true);
+}
+
+private string CodeFieldName(string name) 
+{
+	return CodeName(name, false);
+}
+
+private string CodeName(string name, bool firstUpper = false)
+{
+	if(name.StartsWith("ID_")) name = name.Replace("ID_", "");
+	if(name.StartsWith("MCPE_")) name = name.Replace("MCPE_", "");
+    name = name.ToLowerInvariant();
+
+    string result = name;
+    bool upperCase = firstUpper;
+
+    result = string.Empty;
+    for (int i = 0; i < name.Length; i++)
+    {
+        if (name[i] == ' ' || name[i] == '_')
+        {
+            result += " ";
+            upperCase = true;
+        }
+        else
+        {
+            if ((i == 0 && firstUpper) || upperCase)
+            {
+                result += name[i].ToString().ToUpperInvariant();
+                upperCase = false;
+            }
+            else
+            {
+                result += name[i];
+            }
+        }
+    }
+
+	result = result.Replace(@"[]", "s");
+    return result;
+}
+
+public string SafeToString(XmlNode node)
+{
+	if(node == null) return "";
+
+	return node.Value;
+}
+private void PrintConstants(XmlNodeList nodes)
+{
+	foreach (XmlNode constants in nodes)
+	{
+		WriteLine($"#### {CodeTypeName(constants.Attributes["id"]?.Value)} constants");
+		WriteLine($"");
+		WriteLine($"| Name | Value |");
+		WriteLine($"|:-----|:-----|");
+
+		foreach (XmlNode constant in constants.ChildNodes)
+		{
+			var attributes = constant.Attributes;
+			WriteLine($"|{CodeTypeName(attributes["id"]?.Value)} | {attributes["value"].Value} |");
+		}
+		WriteLine($"");
+
+	}
+}
+
+#>

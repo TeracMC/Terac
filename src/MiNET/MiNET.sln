@@ -1,0 +1,118 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other", "Other", "{DFC6A100-D5F4-4E03-80A5-EEE8823E03E1}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\.editorconfig = ..\..\.editorconfig
+		..\..\README.md = ..\..\README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiNET", "MiNET\MiNET.csproj", "{A40D7181-E216-4C45-AEF8-AB66B42B1D2D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiNET.Console", "MiNET.Console\MiNET.Console.csproj", "{E86CFF0F-B037-470E-8B6D-8EA05831F83E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiNET.Client", "MiNET.Client\MiNET.Client.csproj", "{AA9B416E-430D-4C73-9D68-55962DACE662}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiNET.ServiceKiller", "MiNET.ServiceKiller\MiNET.ServiceKiller.csproj", "{05E4E7B7-FC78-4CD1-8626-29E5922E1C0C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestPlugin", "TestPlugin\TestPlugin.csproj", "{8CBD9231-19E7-4EC3-8A4E-C83E8B8AE3ED}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiNET.Plotter", "MiNET.Plotter\MiNET.Plotter.csproj", "{74EFDA0E-627D-485E-87EE-45108D5AEB06}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiNET.BuilderBase", "MiNET.BuilderBase\MiNET.BuilderBase.csproj", "{69FEC583-68A6-4EE3-8B41-A47BBA5A94F0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiNETTests", "MiNET.Test\MiNETTests.csproj", "{94CA564C-DE93-4761-AF02-A2B05D8DC6D5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiNET.BuilderBase.Tests", "MiNET.BuilderBase.Tests\MiNET.BuilderBase.Tests.csproj", "{78D30EA2-F5FD-460A-943E-C9E29F2D15A9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A40D7181-E216-4C45-AEF8-AB66B42B1D2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A40D7181-E216-4C45-AEF8-AB66B42B1D2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A40D7181-E216-4C45-AEF8-AB66B42B1D2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A40D7181-E216-4C45-AEF8-AB66B42B1D2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E86CFF0F-B037-470E-8B6D-8EA05831F83E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E86CFF0F-B037-470E-8B6D-8EA05831F83E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E86CFF0F-B037-470E-8B6D-8EA05831F83E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E86CFF0F-B037-470E-8B6D-8EA05831F83E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA9B416E-430D-4C73-9D68-55962DACE662}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA9B416E-430D-4C73-9D68-55962DACE662}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA9B416E-430D-4C73-9D68-55962DACE662}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA9B416E-430D-4C73-9D68-55962DACE662}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05E4E7B7-FC78-4CD1-8626-29E5922E1C0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05E4E7B7-FC78-4CD1-8626-29E5922E1C0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05E4E7B7-FC78-4CD1-8626-29E5922E1C0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05E4E7B7-FC78-4CD1-8626-29E5922E1C0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CBD9231-19E7-4EC3-8A4E-C83E8B8AE3ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CBD9231-19E7-4EC3-8A4E-C83E8B8AE3ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CBD9231-19E7-4EC3-8A4E-C83E8B8AE3ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CBD9231-19E7-4EC3-8A4E-C83E8B8AE3ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74EFDA0E-627D-485E-87EE-45108D5AEB06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74EFDA0E-627D-485E-87EE-45108D5AEB06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74EFDA0E-627D-485E-87EE-45108D5AEB06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74EFDA0E-627D-485E-87EE-45108D5AEB06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69FEC583-68A6-4EE3-8B41-A47BBA5A94F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69FEC583-68A6-4EE3-8B41-A47BBA5A94F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69FEC583-68A6-4EE3-8B41-A47BBA5A94F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69FEC583-68A6-4EE3-8B41-A47BBA5A94F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94CA564C-DE93-4761-AF02-A2B05D8DC6D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94CA564C-DE93-4761-AF02-A2B05D8DC6D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94CA564C-DE93-4761-AF02-A2B05D8DC6D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94CA564C-DE93-4761-AF02-A2B05D8DC6D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78D30EA2-F5FD-460A-943E-C9E29F2D15A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78D30EA2-F5FD-460A-943E-C9E29F2D15A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78D30EA2-F5FD-460A-943E-C9E29F2D15A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78D30EA2-F5FD-460A-943E-C9E29F2D15A9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7E96FB1B-DA00-40CE-8BFA-CFDB3A24B985}
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = MiNET.Service\MiNET.Service.csproj
+		Policies = $0
+		$0.TextStylePolicy = $1
+		$1.inheritsSet = VisualStudio
+		$1.inheritsScope = text/plain
+		$1.scope = text/x-csharp
+		$0.CSharpFormattingPolicy = $2
+		$2.IndentSwitchBody = True
+		$2.IndentBlocksInsideExpressions = True
+		$2.AnonymousMethodBraceStyle = NextLine
+		$2.PropertyBraceStyle = NextLine
+		$2.PropertyGetBraceStyle = NextLine
+		$2.PropertySetBraceStyle = NextLine
+		$2.EventBraceStyle = NextLine
+		$2.EventAddBraceStyle = NextLine
+		$2.EventRemoveBraceStyle = NextLine
+		$2.StatementBraceStyle = NextLine
+		$2.ElseNewLinePlacement = NewLine
+		$2.CatchNewLinePlacement = NewLine
+		$2.FinallyNewLinePlacement = NewLine
+		$2.WhileNewLinePlacement = DoNotCare
+		$2.ArrayInitializerWrapping = DoNotChange
+		$2.ArrayInitializerBraceStyle = NextLine
+		$2.BeforeMethodDeclarationParentheses = False
+		$2.BeforeMethodCallParentheses = False
+		$2.BeforeConstructorDeclarationParentheses = False
+		$2.NewLineBeforeConstructorInitializerColon = NewLine
+		$2.NewLineAfterConstructorInitializerColon = SameLine
+		$2.BeforeDelegateDeclarationParentheses = False
+		$2.NewParentheses = False
+		$2.SpacesBeforeBrackets = False
+		$2.inheritsSet = Mono
+		$2.inheritsScope = text/x-csharp
+		$2.scope = text/x-csharp
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,40 @@
+name: .NET Core
+
+on: 
+  push:
+    branches:
+      - master
+
+jobs:
+  nuget:
+    name: Build & Publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.*
+
+      - name: Generate build number
+        id: buildnumber
+        uses: einaregilsson/build-number@v3
+        with:
+          token: ${{secrets.github_token}}    
+        
+      - name: Dotnet Restore
+        working-directory: src/MiNET/MiNET
+        run: dotnet restore
+      
+      - name: Build & Pack
+        working-directory: src/MiNET/MiNET
+        run: |
+          export PKG_VERSION=1.0.${{ steps.buildnumber.outputs.build_number }}
+          dotnet build --configuration Release
+          dotnet pack --configuration Release -o ./nuget -p:PackageVersion="$PKG_VERSION" --include-symbols --include-source
+      
+      - name: Publish Artifacts
+        shell: bash
+        working-directory: src/MiNET/MiNET
+        run: dotnet nuget push ./nuget/*.symbols.nupkg -s "https://api.nuget.org/v3/index.json" -k ${{ secrets.NUGET_KEY }} --skip-duplicate
