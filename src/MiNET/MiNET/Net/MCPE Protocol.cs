@@ -2541,7 +2541,7 @@ namespace MiNET.Net
 		public Item item; // = null;
 		public uint gameType; // = null;
 		public MetadataDictionary metadata; // = null;
-		public PropertySyncData syncdata; // = null;
+		// public PropertySyncData syncdata; // = null;
 		public long entityIdSelf; // = null;
 		public byte playerPermissions; // = null;
 		public byte commandPermissions; // = null;
@@ -2578,7 +2578,9 @@ namespace MiNET.Net
 			Write(item);
 			WriteUnsignedVarInt(gameType);
 			Write(metadata);
-			Write(syncdata);
+			// Write(syncdata);
+   			WriteUnsignedVarInt(0); // int properties
+   			WriteUnsignedVarInt(0); // float properties
 			WriteSignedVarLong(entityIdSelf);
 			Write(playerPermissions);
 			Write(commandPermissions);
@@ -2615,7 +2617,7 @@ namespace MiNET.Net
 			item = ReadItem();
 			gameType = ReadUnsignedVarInt();
 			metadata = ReadMetadataDictionary();
-			syncdata = ReadPropertySyncData();
+			//syncdata = ReadPropertySyncData();
 			entityIdSelf = ReadSignedVarLong();
 			playerPermissions = ReadByte();
 			commandPermissions = ReadByte();
@@ -2650,7 +2652,7 @@ namespace MiNET.Net
 			item=default(Item);
 			gameType=default(uint);
 			metadata=default(MetadataDictionary);
-			syncdata=default(PropertySyncData);
+			// syncdata=default(PropertySyncData);
 			entityIdSelf=default(long);
 			playerPermissions=default(byte);
 			commandPermissions=default(byte);
@@ -2680,7 +2682,7 @@ namespace MiNET.Net
 		public float bodyYaw; // = null;
 		public EntityAttributes attributes; // = null;
 		public MetadataDictionary metadata; // = null;
-		public PropertySyncData syncdata; // = null;
+		// public PropertySyncData syncdata; // = null;
 		public EntityLinks links; // = null;
 
 		public McpeAddEntity()
@@ -2710,7 +2712,9 @@ namespace MiNET.Net
 			Write(bodyYaw);
 			Write(attributes);
 			Write(metadata);
-			Write(syncdata);
+   			WriteUnsignedVarInt(0); // int properties
+   			WriteUnsignedVarInt(0); // float properties
+			// Write(syncdata);
 			Write(links);
 
 			AfterEncode();
@@ -2740,7 +2744,7 @@ namespace MiNET.Net
 			bodyYaw = ReadFloat();
 			attributes = ReadEntityAttributes();
 			metadata = ReadMetadataDictionary();
-			syncdata = ReadPropertySyncData();
+			// syncdata = ReadPropertySyncData();
 			links = ReadEntityLinks();
 
 			AfterDecode();
@@ -4243,7 +4247,7 @@ namespace MiNET.Net
 
 		public long runtimeEntityId; // = null;
 		public MetadataDictionary metadata; // = null;
-		public PropertySyncData syncdata; // = null;
+		// public PropertySyncData syncdata; // = null;
 		public long tick; // = null;
 
 		public McpeSetEntityData()
@@ -4260,7 +4264,9 @@ namespace MiNET.Net
 
 			WriteUnsignedVarLong(runtimeEntityId);
 			Write(metadata);
-			Write(syncdata);
+   			WriteUnsignedVarInt(0); // int properties
+   			WriteUnsignedVarInt(0); // float properties
+			// Write(syncdata);
 			WriteUnsignedVarLong(tick);
 
 			AfterEncode();
@@ -4277,7 +4283,7 @@ namespace MiNET.Net
 
 			runtimeEntityId = ReadUnsignedVarLong();
 			metadata = ReadMetadataDictionary();
-			syncdata = ReadPropertySyncData();
+			// syncdata = ReadPropertySyncData();
 			tick = ReadUnsignedVarLong();
 
 			AfterDecode();
@@ -4292,7 +4298,7 @@ namespace MiNET.Net
 
 			runtimeEntityId=default(long);
 			metadata=default(MetadataDictionary);
-			syncdata=default(PropertySyncData);
+			// syncdata=default(PropertySyncData);
 			tick=default(long);
 		}
 
