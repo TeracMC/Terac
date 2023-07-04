@@ -2772,7 +2772,7 @@ namespace MiNET.Net
 			bodyYaw=default(float);
 			attributes=default(EntityAttributes);
 			metadata=default(MetadataDictionary);
-			syncdata=default(PropertySyncData);
+			//syncdata=default(PropertySyncData);
 			links=default(EntityLinks);
 		}
 
